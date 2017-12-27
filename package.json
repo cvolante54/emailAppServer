@@ -1,14 +1,21 @@
 {
-  "name": "emailserver",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Carlos Volante",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.2"
-  }
+	"name": "emailserver",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"engines": {
+		"node": "9.2.1",
+		"npm": "5.5.1"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon index.js",
+		"start": "nodemon index.js"
+	},
+	"author": "Carlos Volante",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.16.2",
+		"nodemon": "^1.14.3"
+	}
 }
