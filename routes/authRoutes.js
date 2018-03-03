@@ -9,7 +9,14 @@ module.exports = app => {
 		})
 	);
 
-	app.get('/auth/google/callback', passport.authenticate('google'));
+	app.get(
+		'/auth/google/callback',
+		passport.authenticate('google', { failureRedirect: '/login' }),
+		(req, res) => {
+			// Successful authentication, redirect home.
+			res.redirect('/surveys');
+		}
+	);
 
 	//======= Facebook ==========
 	app.get('/auth/facebook', passport.authenticate('facebook'));
@@ -19,13 +26,13 @@ module.exports = app => {
 		passport.authenticate('facebook', { failureRedirect: '/login' }),
 		(req, res) => {
 			// Successful authentication, redirect home.
-			res.redirect('/');
+			res.redirect('/surveys');
 		}
 	);
 
 	app.get('/api/logout', (req, res) => {
 		req.logout();
-		res.send(req.user);
+		res.redirect('/');
 	});
 
 	app.get('/api/current_user', (req, res) => {

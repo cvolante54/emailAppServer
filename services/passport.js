@@ -25,22 +25,19 @@ passport.use(
 			callbackURL: '/auth/google/callback',
 			proxy: true //let's us use heroku as an intermediary while being secure
 		},
-		(accessToken, refreshToken, profile, done) => {
-			User.findOne({ googleId: profile.id }).then(existingUser => {
-				if (existingUser) {
-					//user is already in our DB
-					done(null, existingUser);
-				} else {
-					//user is not yet in our DB
-					new User({
-						googleId: profile.id,
-						displayName: profile.displayName,
-						email: profile.emails[0].value
-					})
-						.save()
-						.then(user => done(null, user));
-				}
-			});
+		async (accessToken, refreshToken, profile, done) => {
+			const existingUser = await User.findOne({ googleId: profile.id });
+			if (existingUser) {
+				//user is already in our DB
+				return done(null, existingUser);
+			}
+			//user is not yet in our DB
+			const user = await new User({
+				googleId: profile.id,
+				displayName: profile.displayName,
+				email: profile.emails[0].value
+			}).save();
+			done(null, user);
 		}
 	)
 );

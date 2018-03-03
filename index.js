@@ -9,7 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-//set uo passport to use cookies
+//set up passport to use cookies
 app.use(
 	cookieSession({
 		maxAge: 5 * 24 * 60 * 60 * 1000,
