@@ -8,7 +8,8 @@ const userSchema = new Schema({
 	facebookId: String,
 	displayName: String,
 	email: { type: String, unique: true, lowercase: true },
-	password: String
+	password: String,
+	credits: { type: Number, default: 0 }
 });
 
 //Create a model class
