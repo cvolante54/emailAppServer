@@ -5,9 +5,11 @@ const passport = require('passport');
 const keys = require('./configs/keys');
 const bodyParser = require('body-parser');
 require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 const app = express();
 
@@ -30,7 +32,9 @@ mongoose.connect(databaseURL);
 //======== routes ==========
 authRoutes(app);
 billingRoutes(app);
+surveyRoutes(app);
 
+//Client side routes
 if (process.env.NODE_ENV === 'production') {
 	//express will serve up production assets
 	//like main.js or main.css
